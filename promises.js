@@ -1,55 +1,3 @@
-// const posts=[
-//     {title:'Post One',body:'This is post one'},
-//     {title:'Post Two',body:'This is post two'}
-// ];
-// function getPosts(){
-//     setTimeout(()=>{
-// let output='';
-
-// posts.forEach((post,index)=>{
-// output+= `<li>${post.title}</li>`
-
-// });
-
-// document.body.innerHTML=output;
-//     },1000);
-  
-// }
-
-// function createPost(post){
-//     return new Promise((resolve,reject)=>{
-//         setTimeout(()=>{
-//             posts.push(post);
-//             const error=false;
-//             if(!error){
-//                 resolve();
-//             }else{
-//                 reject('Error');
-//             }
-//         },2000);
-//     });
-//     }
-//     function deletePost(post){
-//         return new Promise((resolve,reject)=>{
-//             setTimeout(()=>{
-//               posts.pop(post);
-//               const n=posts.length;
-//               if(n!=0){
-//                   resolve();
-//               }else{
-//                   reject('Error');
-//               }
-//             },1000);
-//         });
-//     }
-//     createPost({title:'Post Three',body:'This is post three'}).then(getPosts).catch(err=>console.log(err));
-//     createPost({title:'Post Four',body:'This is post four'}).then(getPosts).catch(err=>console.log(err));
-//     // deletePost(posts[3]).then(getPosts).catch(err=>console.log(err));
-//     // deletePost({title:'Post Two',body:'This is post two'}).then(getPosts).catch(err=>console.log(err));
-
-// const promise1=Promise.resolve('Hello World');
-// const promise2=10;
-
 const posts = [
     { title: 'Post One', body: 'This is post one'},
     { title: 'Post Two', body: 'This is post two'}
@@ -83,9 +31,9 @@ function createPost(post) {
 
 }
 
-createPost({ title: 'Post Three', body: 'This is post three'})
-    .then(getPosts)
-    .catch(err => console.log(err));
+// createPost({ title: 'Post Three', body: 'This is post three'})
+//     .then(getPosts)
+//     .catch(err => console.log(err));
 
 function deletePost() {
     return new Promise((resolve, reject) => {
@@ -113,5 +61,14 @@ const timerId = setInterval(() => {
             clearInterval(timerId);
         });
 }, 2000)
+
+//make createpost and deletepost async wait
+async function init(){
+    await createPost ({ title: 'Post Three', body: 'This is post three'});
+    await createPost ({ title: 'Post Four', body: 'This is post four'});
+    getPosts();
+    deletePost();
+}
+init();
 
 
